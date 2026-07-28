@@ -17,6 +17,7 @@ import {
 import { SERVICES } from "@/data/services";
 import { PACKAGE_DETAILS } from "@/data/packages";
 import { PRICE_FACTS, getLowestMonthly, formatGbp } from "@/lib/seo/pricing";
+import { OG_SERVICE_BY_SLUG } from "@/data/ogImages";
 
 const outDir = process.argv[2] ?? "dist";
 const today = new Date().toISOString().slice(0, 10);
