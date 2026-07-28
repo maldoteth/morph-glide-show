@@ -46,6 +46,20 @@ function validate() {
     if (!paths.includes(`/legal/${d.slug}`)) errors.push(`Missing legal page: /legal/${d.slug}`);
   }
 
+  // Every service must have its OWN distinct OG share card — none missing, none shared.
+  const seen = new Map<string, string>();
+  for (const s of SERVICES) {
+    const og = OG_SERVICE_BY_SLUG[s.slug];
+    if (!og) {
+      errors.push(`Missing OG image for service: ${s.slug}`);
+      continue;
+    }
+    const owner = seen.get(og);
+    if (owner) errors.push(`Duplicate OG image shared by "${owner}" and "${s.slug}": ${og}`);
+    else seen.set(og, s.slug);
+  }
+
+
   if (errors.length) {
     console.error("\n✖ Crawl registry check failed:\n" + errors.map((e) => `  - ${e}`).join("\n") + "\n");
     process.exit(1);
