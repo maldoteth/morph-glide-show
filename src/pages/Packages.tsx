@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, ChevronRight, Sparkles } from "lucide-react";
 import SeoHead from "@/components/SeoHead";
 import { PACKAGE_DETAILS } from "@/data/packages";
-import { PRICE_FACTS, getLowestOneOff, getLowestMonthly } from "@/lib/seo/pricing";
+import { PACKAGES_TITLE, PACKAGES_DESCRIPTION } from "@/lib/seo/staticMeta";
 import { OG_PACKAGES } from "@/data/ogImages";
 import AuroraBackdrop from "@/components/AuroraBackdrop";
 
@@ -20,13 +20,8 @@ export default function PackagesPage() {
   const [billing, setBilling] = useState<"monthly" | "yearly">("monthly");
   const hasAnyYearly = packages.some((p) => p.yearlyPrice);
 
-  // SEO copy numbers are derived from the single pricing source of truth.
-  const fullWorks = PRICE_FACTS["full-works"]?.oneOff?.display ?? "";
-  const elite = PRICE_FACTS["elite"]?.oneOff?.display ?? "";
-  const lowestOneOff = getLowestOneOff()?.display ?? "";
-  const lowestMonthly = getLowestMonthly()?.display.replace("/mo", "/month") ?? "";
-  const seoTitle = `Website Packages & Prices — From ${lowestOneOff} | Pixcellor`;
-  const seoDescription = `Compare Pixcellor packages: Full Works ${fullWorks}, Elite Build ${elite}, and Growth, Scale and Enterprise retainers from ${lowestMonthly}. No hidden fees.`;
+  const seoTitle = PACKAGES_TITLE();
+  const seoDescription = PACKAGES_DESCRIPTION();
 
   return (
     <div className="relative min-h-screen text-foreground overflow-hidden" style={{ background: "#000" }}>

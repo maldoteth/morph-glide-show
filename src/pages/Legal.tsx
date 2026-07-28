@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import SeoHead from "@/components/SeoHead";
 import { OG_LEGAL, OG_LEGAL_BY_SLUG } from "@/data/ogImages";
+import { legalSeo } from "@/data/legalDocsMeta";
 
 type Section = { id: string; heading: string; body: React.ReactNode };
 
@@ -545,12 +546,7 @@ const Legal = () => {
   const { doc } = useParams();
 
   const activeDoc = doc ? ALL_DOCS.find((d) => d.slug === doc) : undefined;
-  const seoTitle = activeDoc
-    ? `${activeDoc.title} · Pixcellor™`
-    : "Legal · Terms, Privacy, Refunds & Acceptable Use · Pixcellor™";
-  const seoDesc = activeDoc
-    ? `${activeDoc.title} for Pixcellor — ${activeDoc.intro}`
-    : "Pixcellor's Terms of Service, Privacy Policy, Refund Policy and Acceptable Use Policy in one place.";
+  const { title: seoTitle, description: seoDesc } = legalSeo(activeDoc?.slug);
   const seoPath = activeDoc ? `/legal/${activeDoc.slug}` : "/legal";
   const seoImage = activeDoc ? (OG_LEGAL_BY_SLUG[activeDoc.slug] ?? OG_LEGAL) : OG_LEGAL;
 
