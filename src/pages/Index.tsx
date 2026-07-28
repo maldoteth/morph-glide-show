@@ -141,8 +141,8 @@ const Index = () => {
   return (
     <div className="w-full">
       <SeoHead
-        title="Pixcellor - Digital Services"
-        description="AI-powered business solutions from a team that's driven $500M+ in market cap across multiple 7-figure launches."
+        title="UK Web Design & App Development Agency | Pixcellor"
+        description="Bespoke websites, web apps and AI automation for UK businesses. Fixed prices from £169, lifetime warranty, live in days — not months."
         path="/"
         image={OG_HOME}
       />
