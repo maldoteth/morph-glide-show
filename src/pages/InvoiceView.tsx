@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { toast } from "sonner";
 import { Copy, Download, Loader2, CheckCircle2, Clock, AlertCircle } from "lucide-react";
+import SeoHead from "@/components/SeoHead";
 
 type LineItem = {
   description: string;
@@ -157,6 +158,12 @@ export default function InvoiceView() {
 
   return (
     <div className="min-h-screen bg-background text-foreground py-10 px-4">
+      <SeoHead
+        title="Your invoice | Pixcellor"
+        description="View and pay your Pixcellor invoice securely."
+        path="/invoice"
+        noindex
+      />
 
       <div className="max-w-3xl mx-auto">
         <div className="flex items-start justify-between gap-4 mb-6">

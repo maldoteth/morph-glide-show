@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { toast } from "sonner";
 import { Loader2, CheckCircle2, Send, ExternalLink, Copy, FileText, ArrowLeft } from "lucide-react";
+import SeoHead from "@/components/SeoHead";
 
 type Invoice = {
   id: string;
@@ -136,6 +137,12 @@ export default function InvoicesAdmin() {
 
   return (
     <div className="min-h-screen bg-background text-foreground p-6">
+      <SeoHead
+        title="Invoices admin | Pixcellor"
+        description="Internal Pixcellor invoice administration."
+        path="/invoices-admin"
+        noindex
+      />
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-6 gap-4 flex-wrap">
           <div className="flex items-center gap-2">

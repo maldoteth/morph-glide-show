@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
+import SeoHead from "@/components/SeoHead";
 
 export default function MeetingRedirect() {
   const { code = "" } = useParams<{ code: string }>();
@@ -30,6 +31,12 @@ export default function MeetingRedirect() {
 
   return (
     <main className="min-h-dvh flex items-center justify-center bg-background text-foreground p-6">
+      <SeoHead
+        title="Joining your meeting | Pixcellor"
+        description="Connecting you to your Pixcellor meeting."
+        path="/meeting"
+        noindex
+      />
       <div className="text-center max-w-md">
         {error ? (
           <>

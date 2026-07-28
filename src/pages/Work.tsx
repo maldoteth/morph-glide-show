@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, MapPin, Search, Briefcase, PoundSterling, Calendar } from "lucide-react";
+import SeoHead from "@/components/SeoHead";
 
 type Vac = {
   id: string;
@@ -95,6 +96,11 @@ export default function Work() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      <SeoHead
+        title="Careers & Live Vacancies | Pixcellor"
+        description="Open roles at Pixcellor and live vacancies we're hiring for across tech, sales, recruitment and construction. Apply online in minutes."
+        path="/work"
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <header className="border-b border-white/10 bg-black/80 backdrop-blur sticky top-0 z-10">

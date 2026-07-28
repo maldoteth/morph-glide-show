@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { Loader2, CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
+import SeoHead from "@/components/SeoHead";
 
 export default function VacancyRespond() {
   const [params] = useSearchParams();
@@ -29,6 +30,12 @@ export default function VacancyRespond() {
   const isConfirm = action === "confirm";
   return (
     <div className="min-h-screen bg-background text-foreground flex items-center justify-center px-4">
+      <SeoHead
+        title="Vacancy response | Pixcellor"
+        description="Confirm or decline a Pixcellor vacancy shift."
+        path="/vacancy/respond"
+        noindex
+      />
       <div className="max-w-md w-full border border-border bg-card p-8 rounded-lg text-center">
         {state === "loading" && (<><Loader2 className="h-8 w-8 animate-spin mx-auto mb-4" /><p className="text-muted-foreground">Recording your response…</p></>)}
         {state === "ok" && (
