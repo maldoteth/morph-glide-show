@@ -175,29 +175,29 @@ function PackageDetailInner({ slug, pkg, billing, setBilling, hasYearly, display
     };
   }, [slug]);
 
+  const trail: Crumb[] = [
+    { name: "Home", path: "/" },
+    { name: "Packages", path: "/packages" },
+    { name: pkg.name.trim(), path: `/packages/${pkg.slug}` },
+  ];
+
+  // Distinct, useful snippet: tagline + real price + billing (tagline alone is often <60 chars).
+  const seoDescription = `${pkg.tagline} ${pkg.name.trim()} from Pixcellor — ${pkg.price}, ${pkg.billing.toLowerCase()}.`;
+
   return (
     <div className="relative min-h-screen text-foreground overflow-hidden" style={{ background: "#000" }}>
       <AuroraBackdrop className="!fixed inset-0 -z-10" />
       <SeoHead
         title={`${pkg.name} — ${pkg.price} | Pixcellor`}
-        description={pkg.tagline}
+        description={seoDescription}
         path={`/packages/${pkg.slug}`}
         image={OG_PACKAGE_BY_SLUG[pkg.slug] ?? pkg.ogImage}
+        jsonLd={buildPackageJsonLd(pkg, trail, seoDescription)}
       />
-      <JsonLd pkg={pkg} />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-5 py-10 md:px-10 md:py-16 pb-28 md:pb-16">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-6 text-xs text-foreground/60">
-          <ol className="flex items-center gap-1.5">
-            <li>
-              <Link to="/" className="hover:text-foreground">Home</Link>
-            </li>
-            <li><ChevronRight className="h-3 w-3" /></li>
-            <li>
-              <Link to="/packages" className="hover:text-foreground">
-                Packages
-              </Link>
+        <PageBreadcrumbs trail={trail} className="mb-6" />
+
             </li>
             <li><ChevronRight className="h-3 w-3" /></li>
             <li className="text-foreground/90">{pkg.name}</li>
