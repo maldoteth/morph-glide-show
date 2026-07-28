@@ -98,6 +98,18 @@ const DEFAULT_ADDONS: PackageAddOn[] = [
 // Calendly/Cal.com placeholder — swap for real URL when available.
 const CAL_URL = "https://cal.com/pixcellor/strategy";
 
+// Annual savings, declared once so billing labels, `yearlySavings` and FAQ copy
+// can never drift apart. Derived display strings are built from these.
+const YEARLY_SAVING = {
+  growth: "£178",
+  scale: "£738",
+  enterprise: "£4,938",
+} as const;
+
+// Free-hosting lead allowance, declared once so the package copy and the
+// comparison table always agree.
+const FREE_LEADS = { "full-works": 25, elite: 150 } as const;
+
 export const PACKAGE_DETAILS: Record<string, PackageDetail> = {
   "full-works": {
     slug: "full-works",
@@ -141,7 +153,7 @@ export const PACKAGE_DETAILS: Record<string, PackageDetail> = {
         title: "Launch & Aftercare",
         items: [
           "Domain connection & DNS setup",
-          "Hosting for first 25 leads",
+          `Hosting for first ${FREE_LEADS["full-works"]} leads`,
           "SSL certificate included",
           "Lifetime warranty on build defects",
           "Email support",
@@ -169,7 +181,7 @@ export const PACKAGE_DETAILS: Record<string, PackageDetail> = {
       { q: "How long does it take?", a: "Typically 3–10 working days from brief to launch." },
       { q: "Do I own the site?", a: "Yes — you own the code, content and domain." },
       { q: "What if I need more pages later?", a: "Add pages anytime, or upgrade to Elite for unlimited revisions." },
-      { q: "Is hosting really free?", a: "Yes — included for the first 25 leads on our global CDN." },
+      { q: "Is hosting really free?", a: `Yes — included for the first ${FREE_LEADS["full-works"]} leads on our global CDN.` },
     ],
     primaryCta: { label: "Get Full Works", action: "packages" },
     secondaryCta: { label: "Talk to sales", action: "sales" },
@@ -289,9 +301,9 @@ export const PACKAGE_DETAILS: Record<string, PackageDetail> = {
     mode: "subscription",
     ogImage: ogGrowth,
     yearlyPrice: "£890/yr",
-    yearlyBilling: "Billed annually · save £178",
+    yearlyBilling: `Billed annually · save ${YEARLY_SAVING.growth}`,
     yearlyPriceId: "price_1Tkw9ZBtUjwejeUw6PkwTVs8",
-    yearlySavings: "£178/yr",
+    yearlySavings: `${YEARLY_SAVING.growth}/yr`,
     sampleWork: [
       { title: "Always-on brochure site", tag: "Unlimited edits", note: "Live updates on demand, no developer required.", image: imgAlwaysOnBrochure },
       { title: "CRM + lead bot", tag: "AI assistant", note: "Captures and qualifies inbound leads 24/7.", image: imgCrmLeadBot },
@@ -363,7 +375,7 @@ export const PACKAGE_DETAILS: Record<string, PackageDetail> = {
     ],
     faqs: [
       { q: "How fast are edits turned around?", a: "Typically within 1–3 working days; urgent fixes same-day." },
-      { q: "Can I cancel anytime?", a: "Yes — monthly plan is cancel-anytime. Yearly saves £200." },
+      { q: "Can I cancel anytime?", a: `Yes — monthly plan is cancel-anytime. Yearly saves ${YEARLY_SAVING.growth}.` },
       { q: "What if I outgrow it?", a: "Upgrade to Scale or Enterprise at any time, prorated." },
     ],
     primaryCta: { label: "Start Growth", action: "packages" },
@@ -382,9 +394,9 @@ export const PACKAGE_DETAILS: Record<string, PackageDetail> = {
     mode: "subscription",
     ogImage: ogScale,
     yearlyPrice: "£3,690/yr",
-    yearlyBilling: "Billed annually · save £738",
+    yearlyBilling: `Billed annually · save ${YEARLY_SAVING.scale}`,
     yearlyPriceId: "price_1TwRfdBtUjwejeUwIeiTES4W",
-    yearlySavings: "£738/yr",
+    yearlySavings: `${YEARLY_SAVING.scale}/yr`,
     scheduleCallUrl: CAL_URL,
     sampleWork: [
       { title: "AI sales agent", tag: "Voice + chat", note: "Books meetings 24/7 directly into the calendar.", image: imgAiSalesAgent },
@@ -451,7 +463,7 @@ export const PACKAGE_DETAILS: Record<string, PackageDetail> = {
     faqs: [
       { q: "Do you replace our developers?", a: "Yes or complement them — we can plug in as squad, lead or backup." },
       { q: "How quickly are AI agents live?", a: "Typically a working agent within 2 weeks of scope sign-off." },
-      { q: "Is there a minimum term?", a: "No — monthly is rolling, yearly saves £958." },
+      { q: "Is there a minimum term?", a: `No — monthly is rolling, yearly saves ${YEARLY_SAVING.scale}.` },
     ],
     primaryCta: { label: "Start Scale", action: "packages" },
     secondaryCta: { label: "Book a strategy call", action: "sales" },
@@ -469,9 +481,9 @@ export const PACKAGE_DETAILS: Record<string, PackageDetail> = {
     mode: "subscription",
     ogImage: ogEnterprise,
     yearlyPrice: "£24,690/yr",
-    yearlyBilling: "Billed annually · save £4,938",
+    yearlyBilling: `Billed annually · save ${YEARLY_SAVING.enterprise}`,
     yearlyPriceId: "price_1Tkw9dBtUjwejeUwOG2jdnoV",
-    yearlySavings: "£4,938/yr",
+    yearlySavings: `${YEARLY_SAVING.enterprise}/yr`,
     scheduleCallUrl: CAL_URL,
     sampleWork: [
       { title: "MVP sprint", tag: "2-week launches", note: "Fully working product every fortnight.", image: imgMvpSprint },
@@ -587,8 +599,8 @@ export const COMPARISON_ROWS: ComparisonRow[] = [
   {
     feature: "Hosting & domains",
     values: {
-      "full-works": "First 20 Leads",
-      elite: "First 150 Leads",
+      "full-works": `First ${FREE_LEADS["full-works"]} Leads`,
+      elite: `First ${FREE_LEADS.elite} Leads`,
       "retainer-growth": "Included",
       "retainer-scale": "Included",
       "retainer-enterprise": "Dedicated servers",
