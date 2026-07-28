@@ -46,6 +46,7 @@
     {
       "@context": "https://schema.org",
       "@type": "Organization",
+      "@id": "https://pixcellor.com/#organization",
       "name": "Pixcellor™",
       "url": "https://pixcellor.com/",
       "logo": {
@@ -54,19 +55,30 @@
         "width": 1080,
         "height": 1080
       },
+      "areaServed": {
+        "@type": "Country",
+        "name": "United Kingdom"
+      },
       "sameAs": []
     }
     </script>
+    <!-- TODO: fill "sameAs" above with our real profile URLs (LinkedIn, X, Instagram,
+         Facebook, YouTube, Crunchbase, Companies House). Google uses these to
+         confirm entity identity — an empty array gives us no entity signal. -->
 
     <!-- WebSite schema for Google Sitelinks Search Box -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
+      "@id": "https://pixcellor.com/#website",
       "name": "Pixcellor™",
-      "url": "https://pixcellor.com/"
+      "url": "https://pixcellor.com/",
+      "inLanguage": "en-GB",
+      "publisher": { "@id": "https://pixcellor.com/#organization" }
     }
     </script>
+
 
     
   
