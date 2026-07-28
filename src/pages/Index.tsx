@@ -231,11 +231,13 @@ const Index = () => {
   return (
     <div className="w-full">
       <SeoHead
-        title="UK Web Design & App Development Agency | Pixcellor"
-        description="Bespoke websites, web apps and AI automation for UK businesses. Fixed prices from £169, lifetime warranty, live in days — not months."
+        title={HOME_TITLE}
+        description={HOME_DESCRIPTION}
         path="/"
         image={OG_HOME}
+        jsonLd={homeJsonLd}
       />
+
       {/* Crawlable semantic heading — visually hidden, surfaces the page topic for SEO/AEO */}
       <h1 className="sr-only">Pixcellor — AI Powered Business Solutions</h1>
       <p className="sr-only">
