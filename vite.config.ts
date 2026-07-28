@@ -40,6 +40,20 @@ const crawlAssets = (): Plugin => {
   };
 };
 
+// Emits one static HTML file per indexable route (dist/<path>/index.html) with
+// that route's real title, description, canonical, OG/Twitter card and JSON-LD,
+// so JS-less social and AI crawlers see the right head. SPA bundles unchanged.
+const prerenderRoutes = (): Plugin => ({
+  name: "pixcellor-prerender-routes",
+  apply: "build",
+  closeBundle() {
+    execFileSync("bun", ["scripts/prerender.ts", path.resolve(__dirname, "dist")], {
+      stdio: "inherit",
+      cwd: __dirname,
+    });
+  },
+});
+
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
   server: {
