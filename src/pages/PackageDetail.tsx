@@ -198,12 +198,6 @@ function PackageDetailInner({ slug, pkg, billing, setBilling, hasYearly, display
       <div className="relative z-10 mx-auto w-full max-w-5xl px-5 py-10 md:px-10 md:py-16 pb-28 md:pb-16">
         <PageBreadcrumbs trail={trail} className="mb-6" />
 
-            </li>
-            <li><ChevronRight className="h-3 w-3" /></li>
-            <li className="text-foreground/90">{pkg.name}</li>
-          </ol>
-        </nav>
-
         {/* HERO */}
         <motion.section {...fadeUp} className="mb-12 md:mb-16">
           {pkg.featured && (
