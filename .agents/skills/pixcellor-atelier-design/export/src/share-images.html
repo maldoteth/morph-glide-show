@@ -51,6 +51,10 @@
 <body>
 <div id="sheet"></div>
 <script>
+// ⚠ Package `chip` values and titles MUST match PACKAGE_DETAILS in src/data/packages.ts,
+// which is priced from the single source of truth in src/lib/seo/pricing.ts.
+// If a price changes there, regenerate cards 07–11 via window.showOnly(i) at 1200×630.
+// Every slug in SERVICES must also have its own card here (build guard: scripts/generate-crawl-assets.ts).
 const PAGES = [
   // ── CORE ──
   { sec:"Core", file:"01-home", cat:"Pixcellor™", eyebrow:"The Digital Builders", title:'You dream it.<br>We <em>build</em> it.', sub:"Bespoke, fast-loading websites & full-stack apps for ambitious businesses.", url:"pixcellor.com", accent:"#5FB8C9", size:"lg" },
