@@ -98,59 +98,39 @@ function StarRow({ count }: { count: number }) {
 }
 
 
-function JsonLd({ pkg }: { pkg: PackageDetail }) {
-  const data = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "Product",
-      name: `Pixcellor ${pkg.name}`,
-      description: pkg.blurb,
-      brand: { "@type": "Brand", name: "Pixcellor" },
-      offers: {
-        "@type": "Offer",
-        price: pkg.price.replace(/[^0-9.]/g, ""),
-        priceCurrency: "GBP",
-        url: `${SITE_ORIGIN}/packages/${pkg.slug}`,
-        availability: "https://schema.org/InStock",
-      },
-    }),
-    [pkg],
+/** Product + Offer + FAQ + WebPage + breadcrumbs for a package page. */
+function buildPackageJsonLd(pkg: PackageDetail, trail: Crumb[], description: string) {
+  const path = `/packages/${pkg.slug}`;
+  const offer = offerFor(pkg.slug);
+
+  const productLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: `Pixcellor ${pkg.name.trim()}`,
+    description: pkg.blurb,
+    brand: { "@type": "Brand", name: "Pixcellor" },
+    url: `${SITE_ORIGIN}${path}`,
+    ...(offer ? { offers: offer } : {}),
+    // Only ever emitted when a real rating exists — never fabricated.
+    ...(pkg.rating
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: pkg.rating.value,
+            reviewCount: pkg.rating.count,
+          },
+        }
+      : {}),
+  };
+
+  return graph(
+    webPage({ name: `${pkg.name.trim()} — Pixcellor`, description, path }),
+    productLd,
+    breadcrumbs(trail),
+    faqPage(pkg.faqs),
   );
-
-  const faqLd = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: pkg.faqs.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    }),
-    [pkg],
-  );
-
-  useEffect(() => {
-    const tag1 = document.createElement("script");
-    tag1.type = "application/ld+json";
-    tag1.textContent = JSON.stringify(data);
-    tag1.setAttribute("data-pkg-ld", pkg.slug);
-    document.head.appendChild(tag1);
-
-    const tag2 = document.createElement("script");
-    tag2.type = "application/ld+json";
-    tag2.textContent = JSON.stringify(faqLd);
-    tag2.setAttribute("data-pkg-faq", pkg.slug);
-    document.head.appendChild(tag2);
-
-    return () => {
-      tag1.remove();
-      tag2.remove();
-    };
-  }, [data, faqLd, pkg.slug]);
-
-  return null;
 }
+
 
 export default function PackageDetailPage() {
   const { slug = "" } = useParams<{ slug: string }>();
