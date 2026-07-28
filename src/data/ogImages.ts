@@ -30,12 +30,15 @@ import svcEcom from "@/assets/og/24-ecommerce-stores.png.asset.json";
 import svcBlockchain from "@/assets/og/25-blockchain-integrations.png.asset.json";
 import svcVideo from "@/assets/og/26-video-3d-animations.png.asset.json";
 import svcRecruit from "@/assets/og/27-recruitment-ats.png.asset.json";
+import svcPayroll from "@/assets/og/28-payroll-hr-tooling.png.asset.json";
 import svcAi from "@/assets/og/29-ai-integrations-agents.png.asset.json";
 import svcConsult from "@/assets/og/30-consultations-audits.png.asset.json";
 import svcAnalytics from "@/assets/og/31-analytics-dashboards.png.asset.json";
 import svcApi from "@/assets/og/32-api-third-party.png.asset.json";
 import svcPm from "@/assets/og/33-product-project-management.png.asset.json";
 import svcDocs from "@/assets/og/34-documents-and-decks.png.asset.json";
+import svcEmail from "@/assets/og/39-email-marketing.png.asset.json";
+import svcCyber from "@/assets/og/40-cyber-security.png.asset.json";
 
 import legalTerms from "@/assets/og/35-legal-terms.png.asset.json";
 import legalPrivacy from "@/assets/og/36-legal-privacy.png.asset.json";
@@ -74,20 +77,20 @@ export const OG_SERVICE_BY_SLUG: Record<string, string> = {
   "animated-sites": toAbsolute(svcAnimated.url),
   "full-web-apps": toAbsolute(svcWebApps.url),
   "internal-tools": toAbsolute(svcInternal.url),
-  "cyber-security": toAbsolute(svcInternal.url),
+  "cyber-security": toAbsolute(svcCyber.url),
   "crm-systems": toAbsolute(svcCrm.url),
   "ecommerce-stores": toAbsolute(svcEcom.url),
   "blockchain-integrations": toAbsolute(svcBlockchain.url),
   "video-3d-animations": toAbsolute(svcVideo.url),
   "recruitment-ats": toAbsolute(svcRecruit.url),
-  // Refreshed OG card served from public/og (replaces the stale "same-day payroll" asset).
-  "payroll-hr-tooling": toAbsolute("/og/28-payroll-hr-tooling.png"),
+  "payroll-hr-tooling": toAbsolute(svcPayroll.url),
   "ai-integrations-agents": toAbsolute(svcAi.url),
   "consultations-audits": toAbsolute(svcConsult.url),
   "analytics-dashboards": toAbsolute(svcAnalytics.url),
   "api-third-party": toAbsolute(svcApi.url),
   "product-project-management": toAbsolute(svcPm.url),
   "documents-and-decks": toAbsolute(svcDocs.url),
+  "email-marketing": toAbsolute(svcEmail.url),
 };
 
 export const OG_LEGAL_BY_SLUG: Record<string, string> = {
