@@ -115,7 +115,7 @@ export default function CandidateApply() {
 
   return (
     <div className="min-h-screen bg-background py-10 px-4">
-      <SeoHead title="Apply for a role · Pixcellor" description="Submit your details and CV to be considered for roles we're recruiting for." path="/jobs/apply" />
+      <SeoHead title="Apply for a role · Pixcellor" description="Submit your details and CV to be considered for roles we're recruiting for." path="/jobs/apply" noindex />
       <div className="mx-auto max-w-2xl space-y-6">
         <header className="text-center space-y-2">
           <h1 className="text-3xl font-semibold">Looking for work?</h1>

@@ -110,6 +110,12 @@ export default function CandidatePortal() {
 
   return (
     <main className="mx-auto max-w-7xl space-y-4 p-4">
+      <SeoHead
+        title="Candidate portal | Pixcellor"
+        description="Your Pixcellor candidate dashboard — jobs, shifts and documents."
+        path="/candidate-portal"
+        noindex
+      />
       <header className="flex items-center justify-between gap-3">
         <div>
           <h1 className="text-xl font-semibold">My dashboard</h1>
