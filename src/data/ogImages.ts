@@ -51,6 +51,7 @@ const ORIGIN = "https://pixcellor.com";
 const toAbsolute = (u: string) =>
   u.startsWith("http") ? u : `${ORIGIN}${u.startsWith("/") ? "" : "/"}${u}`;
 
+export const OG_DEFAULT = toAbsolute(ogDefault.url);
 export const OG_HOME = toAbsolute(home.url);
 export const OG_GET_STARTED = toAbsolute(getStarted.url);
 export const OG_PACKAGES = toAbsolute(packagesImg.url);
