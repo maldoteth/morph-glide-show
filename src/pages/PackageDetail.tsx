@@ -16,6 +16,15 @@ import {
   Heart,
 } from "lucide-react";
 import SeoHead from "@/components/SeoHead";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
+import {
+  breadcrumbs,
+  faqPage,
+  graph,
+  offerFor,
+  webPage,
+  type Crumb,
+} from "@/lib/seo/schema";
 import { OG_PACKAGE_BY_SLUG } from "@/data/ogImages";
 import { Button } from "@/components/ui/button";
 import PackageCompareTable from "@/components/PackageCompareTable";
@@ -98,59 +107,39 @@ function StarRow({ count }: { count: number }) {
 }
 
 
-function JsonLd({ pkg }: { pkg: PackageDetail }) {
-  const data = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "Product",
-      name: `Pixcellor ${pkg.name}`,
-      description: pkg.blurb,
-      brand: { "@type": "Brand", name: "Pixcellor" },
-      offers: {
-        "@type": "Offer",
-        price: pkg.price.replace(/[^0-9.]/g, ""),
-        priceCurrency: "GBP",
-        url: `${SITE_ORIGIN}/packages/${pkg.slug}`,
-        availability: "https://schema.org/InStock",
-      },
-    }),
-    [pkg],
+/** Product + Offer + FAQ + WebPage + breadcrumbs for a package page. */
+function buildPackageJsonLd(pkg: PackageDetail, trail: Crumb[], description: string) {
+  const path = `/packages/${pkg.slug}`;
+  const offer = offerFor(pkg.slug);
+
+  const productLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: `Pixcellor ${pkg.name.trim()}`,
+    description: pkg.blurb,
+    brand: { "@type": "Brand", name: "Pixcellor" },
+    url: `${SITE_ORIGIN}${path}`,
+    ...(offer ? { offers: offer } : {}),
+    // Only ever emitted when a real rating exists — never fabricated.
+    ...(pkg.rating
+      ? {
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: pkg.rating.value,
+            reviewCount: pkg.rating.count,
+          },
+        }
+      : {}),
+  };
+
+  return graph(
+    webPage({ name: `${pkg.name.trim()} — Pixcellor`, description, path }),
+    productLd,
+    breadcrumbs(trail),
+    faqPage(pkg.faqs),
   );
-
-  const faqLd = useMemo(
-    () => ({
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      mainEntity: pkg.faqs.map((f) => ({
-        "@type": "Question",
-        name: f.q,
-        acceptedAnswer: { "@type": "Answer", text: f.a },
-      })),
-    }),
-    [pkg],
-  );
-
-  useEffect(() => {
-    const tag1 = document.createElement("script");
-    tag1.type = "application/ld+json";
-    tag1.textContent = JSON.stringify(data);
-    tag1.setAttribute("data-pkg-ld", pkg.slug);
-    document.head.appendChild(tag1);
-
-    const tag2 = document.createElement("script");
-    tag2.type = "application/ld+json";
-    tag2.textContent = JSON.stringify(faqLd);
-    tag2.setAttribute("data-pkg-faq", pkg.slug);
-    document.head.appendChild(tag2);
-
-    return () => {
-      tag1.remove();
-      tag2.remove();
-    };
-  }, [data, faqLd, pkg.slug]);
-
-  return null;
 }
+
 
 export default function PackageDetailPage() {
   const { slug = "" } = useParams<{ slug: string }>();
@@ -195,34 +184,28 @@ function PackageDetailInner({ slug, pkg, billing, setBilling, hasYearly, display
     };
   }, [slug]);
 
+  const trail: Crumb[] = [
+    { name: "Home", path: "/" },
+    { name: "Packages", path: "/packages" },
+    { name: pkg.name.trim(), path: `/packages/${pkg.slug}` },
+  ];
+
+  // Distinct, useful snippet: tagline + real price + billing (tagline alone is often <60 chars).
+  const seoDescription = `${pkg.tagline} ${pkg.name.trim()} from Pixcellor — ${pkg.price}, ${pkg.billing.toLowerCase()}.`;
+
   return (
     <div className="relative min-h-screen text-foreground overflow-hidden" style={{ background: "#000" }}>
       <AuroraBackdrop className="!fixed inset-0 -z-10" />
       <SeoHead
         title={`${pkg.name} — ${pkg.price} | Pixcellor`}
-        description={pkg.tagline}
+        description={seoDescription}
         path={`/packages/${pkg.slug}`}
         image={OG_PACKAGE_BY_SLUG[pkg.slug] ?? pkg.ogImage}
+        jsonLd={buildPackageJsonLd(pkg, trail, seoDescription)}
       />
-      <JsonLd pkg={pkg} />
 
       <div className="relative z-10 mx-auto w-full max-w-5xl px-5 py-10 md:px-10 md:py-16 pb-28 md:pb-16">
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" className="mb-6 text-xs text-foreground/60">
-          <ol className="flex items-center gap-1.5">
-            <li>
-              <Link to="/" className="hover:text-foreground">Home</Link>
-            </li>
-            <li><ChevronRight className="h-3 w-3" /></li>
-            <li>
-              <Link to="/packages" className="hover:text-foreground">
-                Packages
-              </Link>
-            </li>
-            <li><ChevronRight className="h-3 w-3" /></li>
-            <li className="text-foreground/90">{pkg.name}</li>
-          </ol>
-        </nav>
+        <PageBreadcrumbs trail={trail} className="mb-6" />
 
         {/* HERO */}
         <motion.section {...fadeUp} className="mb-12 md:mb-16">
