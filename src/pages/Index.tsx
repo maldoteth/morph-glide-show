@@ -4,95 +4,13 @@ import IntroAnimation from "@/components/ui/scroll-morph-hero";
 import { useIsMobile } from "@/hooks/use-mobile";
 import SeoHead from "@/components/SeoHead";
 import { OG_HOME } from "@/data/ogImages";
-import { PRICE_FACTS } from "@/lib/seo/pricing";
+// Head copy + schema live in src/lib/seo/staticMeta.ts so the build-time
+// prerendered HTML and this runtime head can never disagree.
 import {
-  ORG_ID,
-  allPackageOffers,
-  breadcrumbs,
-  faqPage,
-  graph,
-  monthlyPriceRange,
-  webPage,
-} from "@/lib/seo/schema";
-
-const HOME_TITLE = "UK Web Design & App Development Agency | Pixcellor";
-const HOME_DESCRIPTION =
-  "Bespoke websites, web apps and AI automation for UK businesses. Fixed prices from £169, lifetime warranty, live in days — not months.";
-
-const price = (slug: string, key: "monthly" | "yearly" | "oneOff") =>
-  PRICE_FACTS[slug]?.[key]?.display ?? "";
-
-// ProfessionalService node — the canonical Organization for the whole site.
-// Only rendered on "/", so it never pollutes other routes.
-const professionalServiceLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": ORG_ID,
-  name: "Pixcellor™",
-  url: "https://pixcellor.com/",
-  description: HOME_DESCRIPTION,
-  priceRange: monthlyPriceRange(),
-  areaServed: { "@type": "Country", name: "United Kingdom" },
-  serviceType: [
-    "Web design",
-    "Web application development",
-    "Mobile app development",
-    "AI automation",
-    "SEO, AEO & GEO",
-    "Branding and creative direction",
-  ],
-  knowsAbout: [
-    "Website design and development",
-    "React and TypeScript web apps",
-    "AI agents and chatbots",
-    "Search engine and answer engine optimisation",
-    "E-commerce stores",
-    "Lead generation and telesales",
-    "Blockchain and Web3 integrations",
-  ],
-  hasOfferCatalog: {
-    "@type": "OfferCatalog",
-    name: "Pixcellor packages",
-    itemListElement: allPackageOffers(),
-  },
-};
-
-// FAQ schema is limited to questions the homepage genuinely answers in
-// visible copy (the pricing and services panels shown on the page).
-const homeFaqLd = faqPage([
-  {
-    q: "How much does a Pixcellor retainer cost?",
-    a: `Growth is ${price("retainer-growth", "monthly")}, Scale is ${price(
-      "retainer-scale",
-      "monthly",
-    )} and Enterprise is ${price("retainer-enterprise", "monthly")}, all billed monthly.`,
-  },
-  {
-    q: "Do you offer one-off website builds?",
-    a: `Yes. Full Works is a one-time ${price(
-      "full-works",
-      "oneOff",
-    )} build and Elite Build is a one-time ${price("elite", "oneOff")} build.`,
-  },
-  {
-    q: "Can I pay yearly instead of monthly?",
-    a: `Yes. Yearly billing is ${price("retainer-growth", "yearly")} for Growth, ${price(
-      "retainer-scale",
-      "yearly",
-    )} for Scale and ${price("retainer-enterprise", "yearly")} for Enterprise.`,
-  },
-  {
-    q: "Can I cancel a retainer at any time?",
-    a: "Growth and Scale are billed monthly and can be cancelled at any time. Enterprise runs on 30 days' notice.",
-  },
-]);
-
-const homeJsonLd = graph(
-  professionalServiceLd,
-  webPage({ name: HOME_TITLE, description: HOME_DESCRIPTION, path: "/" }),
-  breadcrumbs([{ name: "Home", path: "/" }]),
-  homeFaqLd,
-);
+  HOME_TITLE,
+  HOME_DESCRIPTION,
+  HOME_JSON_LD as homeJsonLd,
+} from "@/lib/seo/staticMeta";
 
 
 // Lazy-loaded: large bundles or overlays that mount on user events.

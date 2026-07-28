@@ -10,6 +10,7 @@ import {
 import { Link } from "react-router-dom";
 
 import SeoHead from "@/components/SeoHead";
+import { GET_STARTED_TITLE, GET_STARTED_DESCRIPTION } from "@/lib/seo/staticMeta";
 import { OG_GET_STARTED } from "@/data/ogImages";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -30,7 +31,6 @@ import CallBookingPicker, { type BookingSelection } from "@/components/CallBooki
 import PackageCompareTable from "@/components/PackageCompareTable";
 import AllInOneComparison from "@/components/AllInOneComparison";
 import { PACKAGE_DETAILS } from "@/data/packages";
-import { getLowestOneOff } from "@/lib/seo/pricing";
 import { SERVICES, SERVICE_CATEGORIES, type ServiceCategory } from "@/data/services";
 
 import hays from "@/assets/logos/hays.svg";
@@ -282,8 +282,8 @@ const GetStarted = () => {
   return (
     <div className="min-h-screen bg-black text-white">
       <SeoHead
-        title="Get Started — AI Websites in 24 Hours | Pixcellor"
-        description={`Book a free 15-minute call with Pixcellor. AI-powered websites, chatbots and apps for UK businesses. From ${getLowestOneOff()?.display ?? "£169"}. Live in 24 hours.`}
+        title={GET_STARTED_TITLE}
+        description={GET_STARTED_DESCRIPTION()}
         path="/get-started"
         image={OG_GET_STARTED}
       />

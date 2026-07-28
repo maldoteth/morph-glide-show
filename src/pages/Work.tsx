@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, MapPin, Search, Briefcase, PoundSterling, Calendar } from "lucide-react";
 import SeoHead from "@/components/SeoHead";
+import { WORK_TITLE, WORK_DESCRIPTION } from "@/lib/seo/staticMeta";
 
 type Vac = {
   id: string;
@@ -85,8 +86,8 @@ export default function Work() {
   return (
     <div className="min-h-screen bg-black text-white">
       <SeoHead
-        title="Careers & Live Vacancies | Pixcellor"
-        description="Open roles at Pixcellor and live vacancies we're hiring for across tech, sales, recruitment and construction. Apply online in minutes."
+        title={WORK_TITLE}
+        description={WORK_DESCRIPTION}
         path="/work"
       />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />

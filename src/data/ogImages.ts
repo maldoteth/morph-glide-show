@@ -1,6 +1,7 @@
 // Per-page Open Graph / social share images.
 // Each entry imports a CDN-backed .asset.json pointer.
 
+import ogDefault from "@/assets/og/00-default.png.asset.json";
 import home from "@/assets/og/01-home.png.asset.json";
 import getStarted from "@/assets/og/02-get-started.png.asset.json";
 import packagesImg from "@/assets/og/03-packages.png.asset.json";
@@ -50,6 +51,7 @@ const ORIGIN = "https://pixcellor.com";
 const toAbsolute = (u: string) =>
   u.startsWith("http") ? u : `${ORIGIN}${u.startsWith("/") ? "" : "/"}${u}`;
 
+export const OG_DEFAULT = toAbsolute(ogDefault.url);
 export const OG_HOME = toAbsolute(home.url);
 export const OG_GET_STARTED = toAbsolute(getStarted.url);
 export const OG_PACKAGES = toAbsolute(packagesImg.url);
