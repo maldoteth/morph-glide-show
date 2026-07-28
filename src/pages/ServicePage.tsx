@@ -3,13 +3,16 @@ import { Link, useParams, Navigate } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import SeoHead from "@/components/SeoHead";
 import Footer from "@/components/Footer";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
 import ServiceSalesView from "@/components/services/ServiceSalesView";
+import RelatedServices from "@/components/services/RelatedServices";
 import LetsTalkPrompt from "@/components/LetsTalkPrompt";
 import PackagesDialog from "@/components/PackagesDialog";
 import VisionGenerator from "@/components/VisionGenerator";
 import { getServiceBySlug } from "@/data/services";
 import { SERVICE_SEO } from "@/data/serviceSeo";
 import { OG_SERVICE_BY_SLUG, OG_SERVICES } from "@/data/ogImages";
+import { breadcrumbs, faqPage, graph, orgRef, webPage, type Crumb } from "@/lib/seo/schema";
 
 export default function ServicePage() {
   const { slug = "" } = useParams();
@@ -21,10 +24,17 @@ export default function ServicePage() {
 
   if (!service) return <Navigate to="/services" replace />;
 
-  const url = `https://pixcellor.com/services/${service.slug}`;
+  const path = `/services/${service.slug}`;
+  const url = `https://pixcellor.com${path}`;
   const seo = SERVICE_SEO[service.slug];
   const seoTitle = seo?.title ?? `${service.name} — Pixcellor`;
   const seoDescription = seo?.description ?? service.tagline;
+
+  const trail: Crumb[] = [
+    { name: "Home", path: "/" },
+    { name: "Services", path: "/services" },
+    { name: service.name, path },
+  ];
 
   const serviceLd = {
     "@context": "https://schema.org",
@@ -33,12 +43,11 @@ export default function ServicePage() {
     serviceType: service.name,
     description: service.heroBlurb,
     url,
-    provider: {
-      "@type": "Organization",
-      name: "Pixcellor™",
-      url: "https://pixcellor.com/",
-    },
-    areaServed: "Worldwide",
+    provider: orgRef(),
+    areaServed: [
+      { "@type": "Country", name: "United Kingdom" },
+      { "@type": "Place", name: "Worldwide" },
+    ],
     ...(seo?.keywords ? { keywords: seo.keywords.join(", ") } : {}),
     ...(service.pricing
       ? {
@@ -52,32 +61,24 @@ export default function ServicePage() {
       : {}),
   };
 
-  const breadcrumbLd = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    itemListElement: [
-      { "@type": "ListItem", position: 1, name: "Home", item: "https://pixcellor.com/" },
-      { "@type": "ListItem", position: 2, name: "Services", item: "https://pixcellor.com/services" },
-      { "@type": "ListItem", position: 3, name: service.name, item: url },
-    ],
-  };
+  // FAQ schema only when the same FAQs actually render on the page.
+  const faqLd = faqPage(service.faqs);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoHead
         title={seoTitle}
         description={seoDescription}
-        path={`/services/${service.slug}`}
+        path={path}
         image={OG_SERVICE_BY_SLUG[service.slug] ?? OG_SERVICES}
+        jsonLd={graph(
+          webPage({ name: seoTitle, description: seoDescription, path }),
+          serviceLd,
+          breadcrumbs(trail),
+          faqLd,
+        )}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(serviceLd) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbLd) }}
-      />
+
 
 
       <header className="sticky top-0 z-30 border-b border-foreground/10 bg-background/80 backdrop-blur-md">
