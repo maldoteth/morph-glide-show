@@ -5,11 +5,24 @@ Disallow: /portal
 Disallow: /portal-login
 Disallow: /customer-login
 Disallow: /customer-portal
+Disallow: /invoice/
+Disallow: /invoices-admin
+Disallow: /preview/
+Disallow: /call/
+Disallow: /meeting/
+Disallow: /byow/edit/
+Disallow: /s/
+Disallow: /r/
+Disallow: /jobs/apply
+Disallow: /vacancy/
+Disallow: /auth/
 Disallow: /reset-password
 Disallow: /unsubscribe
 Disallow: /order-success
 Disallow: /project-requirements
 Disallow: /edit-request
+Disallow: /me
+Disallow: /candidate-portal
 
 User-agent: facebookexternalhit
 Allow: /
