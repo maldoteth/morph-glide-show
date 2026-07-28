@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Copy, ArrowRight, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import SeoHead from "@/components/SeoHead";
 
 const PROJECT_REF = "rkgjkvghejcmostuqkgw";
 const SHARE_IMG_BASE = `https://${PROJECT_REF}.supabase.co/functions/v1/affiliate-share-image`;
