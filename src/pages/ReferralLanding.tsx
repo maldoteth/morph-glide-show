@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Copy, ArrowRight, Share2 } from "lucide-react";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
+import SeoHead from "@/components/SeoHead";
 
 const PROJECT_REF = "rkgjkvghejcmostuqkgw";
 const SHARE_IMG_BASE = `https://${PROJECT_REF}.supabase.co/functions/v1/affiliate-share-image`;
@@ -53,24 +54,18 @@ export default function ReferralLanding() {
 
   return (
     <>
+      <SeoHead
+        title={title}
+        description={description}
+        path={`/r/${code ?? ""}`}
+        image={shareImage}
+        noindex
+      />
       <Helmet>
-        <title>{title}</title>
-        <meta name="description" content={description} />
-        <link rel="canonical" href={pageUrl} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={pageUrl} />
-        <meta property="og:title" content={title} />
-        <meta property="og:description" content={description} />
-        <meta property="og:image" content={shareImage} />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={title} />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={shareImage} />
         {/* Crawler-safe fallback redirect */}
         <meta httpEquiv="refresh" content={`3;url=${ctaUrl}`} />
       </Helmet>
+
 
       <main className="min-h-screen bg-black text-white flex items-center justify-center px-6 py-16">
         <div className="max-w-3xl w-full text-center space-y-8">

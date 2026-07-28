@@ -9,7 +9,7 @@ export type ServiceSeo = {
 
 export const SERVICE_SEO: Record<string, ServiceSeo> = {
   "telesales-campaigns": {
-    title: "Telesales Campaigns UK — £22/hr, Recorded Calls | Pixcellor",
+    title: "Telesales Campaigns UK — £22/hr, Recorded | Pixcellor",
     description:
       "Outbound B2B & B2C telesales from UK veterans. £22/hr, every call recorded to your CRM, weekly reviews. Book a sales call.",
     keywords: [
@@ -45,7 +45,7 @@ export const SERVICE_SEO: Record<string, ServiceSeo> = {
     ],
   },
   "seo-aeo-optimisation": {
-    title: "SEO & AEO Optimisation — Rank on Google & ChatGPT | Pixcellor",
+    title: "SEO & AEO — Rank on Google and ChatGPT | Pixcellor",
     description:
       "Technical SEO, content and Answer Engine Optimisation so you show up in Google AND AI assistants. Audit, fix, rank, report.",
     keywords: [
@@ -57,7 +57,7 @@ export const SERVICE_SEO: Record<string, ServiceSeo> = {
     ],
   },
   "social-media-automation": {
-    title: "Social Media Automation Agency — AI Content & DMs | Pixcellor",
+    title: "Social Media Automation — AI Content & DMs | Pixcellor",
     description:
       "Automated social content, scheduling and DM workflows that replace SMM teams. Lead capture into your CRM, 24/7 brand voice.",
     keywords: [
@@ -93,7 +93,7 @@ export const SERVICE_SEO: Record<string, ServiceSeo> = {
     ],
   },
   "animated-sites": {
-    title: "Award-Grade Animated Websites — Built in 10 Days | Pixcellor",
+    title: "Animated Websites Built in 10 Days | Pixcellor",
     description:
       "Scroll-driven, 3D, 60fps animated websites with agency polish at a fraction of the price. 10-day turnaround. Free sample.",
     keywords: [
@@ -192,9 +192,9 @@ export const SERVICE_SEO: Record<string, ServiceSeo> = {
     ],
   },
   "payroll-hr-tooling": {
-    title: "Construction Payroll — HMRC Compliance, 1% Cashback & Cash Flow | Pixcellor",
+    title: "Construction Payroll & CIS — 1% Cashback | Pixcellor",
     description:
-      "Specialist construction payroll: full employment-status protection, pay your subcontractor wage bill by credit card, and earn 1% cashback every week. CIS and CITB handled.",
+      "Specialist CIS construction payroll: HMRC-compliant status protection, pay your wage bill by credit card, and earn 1% cashback every week.",
     keywords: [
       "construction payroll",
       "CIS payroll",
@@ -228,7 +228,7 @@ export const SERVICE_SEO: Record<string, ServiceSeo> = {
     ],
   },
   "analytics-dashboards": {
-    title: "Custom Analytics Dashboards for Your Whole Business | Pixcellor",
+    title: "Custom Analytics & KPI Dashboards | Pixcellor",
     description:
       "Unified dashboards pulling sales, ops, finance and marketing data — real-time cashflow, pipeline and KPIs on one screen.",
     keywords: [
@@ -264,7 +264,7 @@ export const SERVICE_SEO: Record<string, ServiceSeo> = {
     ],
   },
   "email-marketing": {
-    title: "Email Marketing Agency — Lifecycle, Broadcast & Deliverability | Pixcellor",
+    title: "Email Marketing Agency — Lifecycle & Broadcast | Pixcellor",
     description:
       "Full-service email marketing on Klaviyo, HubSpot, Mailchimp, Brevo and custom stacks. Lifecycle flows, broadcasts, deliverability and revenue-driven programmes.",
     keywords: [
@@ -288,7 +288,7 @@ export const SERVICE_SEO: Record<string, ServiceSeo> = {
     ],
   },
   "video-3d-animations": {
-    title: "Video & 3D Animation Studio — Product, Ads, WebGL | Pixcellor",
+    title: "Video & 3D Animation Studio — Ads, WebGL | Pixcellor",
     description:
       "Cinematic video, motion graphics and 3D animation for products, ads, explainers and immersive web experiences. Cinema-grade output.",
     keywords: [

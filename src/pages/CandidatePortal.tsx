@@ -12,6 +12,7 @@ import KycDocuments from "@/components/portal/KycDocuments";
 import PortalScheduleGrid from "@/components/portal/PortalScheduleGrid";
 import PortalMyJobs from "@/components/portal/PortalMyJobs";
 import PortalClientVacancies from "@/components/portal/PortalClientVacancies";
+import SeoHead from "@/components/SeoHead";
 
 type AccessIds = { as_candidate: string[]; as_client: string[]; email: string | null };
 
@@ -56,6 +57,12 @@ export default function CandidatePortal() {
   if (!session) {
     return (
       <main className="mx-auto flex min-h-screen max-w-md flex-col items-center justify-center gap-4 p-6">
+        <SeoHead
+          title="Candidate sign in | Pixcellor"
+          description="Sign in to your Pixcellor candidate portal."
+          path="/candidate-portal"
+          noindex
+        />
         <CalendarDays className="h-10 w-10 text-primary" />
         <h1 className="text-2xl font-semibold">Sign in</h1>
         <p className="text-center text-sm text-muted-foreground">
@@ -103,6 +110,12 @@ export default function CandidatePortal() {
 
   return (
     <main className="mx-auto max-w-7xl space-y-4 p-4">
+      <SeoHead
+        title="Candidate portal | Pixcellor"
+        description="Your Pixcellor candidate dashboard — jobs, shifts and documents."
+        path="/candidate-portal"
+        noindex
+      />
       <header className="flex items-center justify-between gap-3">
         <div>
           <h1 className="text-xl font-semibold">My dashboard</h1>

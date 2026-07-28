@@ -164,7 +164,7 @@ export default function ByowGeneratedEditor() {
 
   return (
     <>
-      <SeoHead title={`Edit · ${site.display_name}`} description="Edit your AI-generated site." path={`/byow/edit/${site.ref}`} />
+      <SeoHead title={`Edit · ${site.display_name}`} description="Edit your AI-generated site." path={`/byow/edit/${site.ref}`} noindex />
       <div className="h-screen w-screen bg-black text-white flex flex-col overflow-hidden">
         {/* Top bar */}
         <header className="shrink-0 h-12 border-b border-white/10 px-4 flex items-center justify-between gap-3">

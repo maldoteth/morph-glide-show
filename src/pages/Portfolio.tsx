@@ -28,7 +28,6 @@ export default function Portfolio() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    document.title = "Portfolio — Pixcellor";
     (async () => {
       const { data } = await supabase
         .from("portfolio_projects")
@@ -42,8 +41,8 @@ export default function Portfolio() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <SeoHead
-        title="Portfolio — Pixcellor"
-        description="Selected work from Pixcellor — modern, animated, and interactive websites and apps built for ambitious brands."
+        title="Portfolio — Websites & Apps We've Built | Pixcellor"
+        description="Real Pixcellor builds: animated brand sites, Web3 platforms, SaaS dashboards and e-commerce stores for UK and international clients."
         path="/portfolio"
         image={OG_PORTFOLIO}
       />

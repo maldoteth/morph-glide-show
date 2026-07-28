@@ -16,8 +16,8 @@ export default function ServicesIndex() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoHead
-        title="Services — Pixcellor"
-        description="Marketing, tech and business services from Pixcellor — websites, web apps, telesales, recruitment, AI agents and more."
+        title="Web, App, AI & Growth Services | Pixcellor"
+        description="25 services across web, apps, AI, marketing and operations — from £22/hr telesales to full-stack builds and fractional CTO retainers."
         path="/services"
         image={OG_SERVICES}
       />
@@ -31,7 +31,7 @@ export default function ServicesIndex() {
       </header>
 
       <main className="mx-auto max-w-5xl px-5 py-10 md:px-10 md:py-16">
-        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">Services</h1>
+        <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">Web, App &amp; Growth Services</h1>
         <p className="mt-3 max-w-2xl text-base md:text-lg text-foreground/70">
           Marketing, tech and business solutions — from £22/hour telesales to award-grade animated sites and AI agents that run your back office 24/7.
         </p>

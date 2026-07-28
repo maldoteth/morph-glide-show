@@ -7,6 +7,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Loader2, MapPin, Search, Briefcase, PoundSterling, Calendar } from "lucide-react";
+import SeoHead from "@/components/SeoHead";
 
 type Vac = {
   id: string;
@@ -37,18 +38,6 @@ export default function Work() {
   const [arrangement, setArrangement] = useState<string>("any");
   const [employment, setEmployment] = useState<string>("any");
   const [minPay, setMinPay] = useState<string>("");
-
-  useEffect(() => {
-    document.title = "Open Vacancies | Pixcellor Work";
-    const meta = document.querySelector('meta[name="description"]') || (() => {
-      const m = document.createElement("meta"); m.setAttribute("name", "description"); document.head.appendChild(m); return m;
-    })();
-    meta.setAttribute("content", "Browse open vacancies at Pixcellor. Search by role, location, remote/hybrid, salary and employment type.");
-    const linkCanon = document.querySelector('link[rel="canonical"]') || (() => {
-      const l = document.createElement("link"); l.setAttribute("rel", "canonical"); document.head.appendChild(l); return l;
-    })();
-    linkCanon.setAttribute("href", "https://pixcellor.com/work");
-  }, []);
 
   const load = useCallback(async () => {
     setLoading(true);
@@ -95,6 +84,11 @@ export default function Work() {
 
   return (
     <div className="min-h-screen bg-black text-white">
+      <SeoHead
+        title="Careers & Live Vacancies | Pixcellor"
+        description="Open roles at Pixcellor and live vacancies we're hiring for across tech, sales, recruitment and construction. Apply online in minutes."
+        path="/work"
+      />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <header className="border-b border-white/10 bg-black/80 backdrop-blur sticky top-0 z-10">
