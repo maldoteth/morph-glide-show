@@ -39,18 +39,6 @@ export default function Work() {
   const [employment, setEmployment] = useState<string>("any");
   const [minPay, setMinPay] = useState<string>("");
 
-  useEffect(() => {
-    document.title = "Open Vacancies | Pixcellor Work";
-    const meta = document.querySelector('meta[name="description"]') || (() => {
-      const m = document.createElement("meta"); m.setAttribute("name", "description"); document.head.appendChild(m); return m;
-    })();
-    meta.setAttribute("content", "Browse open vacancies at Pixcellor. Search by role, location, remote/hybrid, salary and employment type.");
-    const linkCanon = document.querySelector('link[rel="canonical"]') || (() => {
-      const l = document.createElement("link"); l.setAttribute("rel", "canonical"); document.head.appendChild(l); return l;
-    })();
-    linkCanon.setAttribute("href", "https://pixcellor.com/work");
-  }, []);
-
   const load = useCallback(async () => {
     setLoading(true);
     const { data, error } = await supabase.rpc("public_open_vacancies" as never, {
