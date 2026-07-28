@@ -100,8 +100,15 @@ export default function ServicePage() {
       </header>
 
       <main>
+        <div className="mx-auto max-w-5xl px-5 pt-5 md:px-10">
+          <PageBreadcrumbs trail={trail} />
+        </div>
         <ServiceSalesView service={service} />
+        <div className="mx-auto max-w-5xl px-5 pb-16 md:px-10">
+          <RelatedServices service={service} />
+        </div>
       </main>
+
 
       <Footer />
 
