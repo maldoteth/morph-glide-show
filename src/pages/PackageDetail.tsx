@@ -16,6 +16,15 @@ import {
   Heart,
 } from "lucide-react";
 import SeoHead from "@/components/SeoHead";
+import PageBreadcrumbs from "@/components/PageBreadcrumbs";
+import {
+  breadcrumbs,
+  faqPage,
+  graph,
+  offerFor,
+  webPage,
+  type Crumb,
+} from "@/lib/seo/schema";
 import { OG_PACKAGE_BY_SLUG } from "@/data/ogImages";
 import { Button } from "@/components/ui/button";
 import PackageCompareTable from "@/components/PackageCompareTable";
