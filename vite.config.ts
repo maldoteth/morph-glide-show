@@ -1,8 +1,44 @@
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { execFileSync } from "child_process";
+import { readFileSync } from "fs";
+import { tmpdir } from "os";
 import { componentTagger } from "lovable-tagger";
 import { mcpPlugin } from "@lovable.dev/mcp-js/stacks/supabase/vite";
+
+// Generates sitemap.xml + llms.txt from src/lib/seo/routes.ts (single source of truth).
+// Fails the build loudly if the registry drifts from the app's real routes.
+const crawlAssets = (): Plugin => {
+  const generate = (outDir: string) =>
+    execFileSync("bun", ["scripts/generate-crawl-assets.ts", outDir], {
+      stdio: "inherit",
+      cwd: __dirname,
+    });
+
+  return {
+    name: "pixcellor-crawl-assets",
+    apply: () => true,
+    closeBundle() {
+      generate(path.resolve(__dirname, "dist"));
+    },
+    configureServer(server) {
+      const devDir = path.join(tmpdir(), "pixcellor-crawl");
+      server.middlewares.use((req, res, next) => {
+        const url = (req.url ?? "").split("?")[0];
+        if (url !== "/sitemap.xml" && url !== "/llms.txt") return next();
+        try {
+          generate(devDir);
+          const body = readFileSync(path.join(devDir, url.slice(1)));
+          res.setHeader("Content-Type", url.endsWith(".xml") ? "application/xml" : "text/plain");
+          res.end(body);
+        } catch {
+          next();
+        }
+      });
+    },
+  };
+};
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
@@ -13,7 +49,8 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger(), mcpPlugin()].filter(Boolean),
+  plugins: [react(), mode === "development" && componentTagger(), mcpPlugin(), crawlAssets()].filter(Boolean),
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
