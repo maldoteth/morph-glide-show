@@ -63,7 +63,7 @@ export default defineConfig(({ mode }) => ({
       overlay: false,
     },
   },
-  plugins: [react(), mode === "development" && componentTagger(), mcpPlugin(), crawlAssets()].filter(Boolean),
+  plugins: [react(), mode === "development" && componentTagger(), mcpPlugin(), crawlAssets(), prerenderRoutes()].filter(Boolean),
 
   resolve: {
     alias: {
