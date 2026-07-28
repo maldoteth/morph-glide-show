@@ -5,6 +5,7 @@ import { ArrowLeft, ExternalLink } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import SeoHead from "@/components/SeoHead";
 import { OG_PORTFOLIO } from "@/data/ogImages";
+import { PORTFOLIO_TITLE, PORTFOLIO_DESCRIPTION } from "@/lib/seo/staticMeta";
 
 type Project = {
   name: string;
@@ -41,8 +42,8 @@ export default function Portfolio() {
   return (
     <main className="min-h-screen bg-background text-foreground">
       <SeoHead
-        title="Portfolio — Websites & Apps We've Built | Pixcellor"
-        description="Real Pixcellor builds: animated brand sites, Web3 platforms, SaaS dashboards and e-commerce stores for UK and international clients."
+        title={PORTFOLIO_TITLE}
+        description={PORTFOLIO_DESCRIPTION}
         path="/portfolio"
         image={OG_PORTFOLIO}
       />

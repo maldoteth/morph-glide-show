@@ -5,6 +5,7 @@ import SeoHead from "@/components/SeoHead";
 import Footer from "@/components/Footer";
 import { SERVICE_CATEGORIES, SERVICES, type ServiceCategory } from "@/data/services";
 import { OG_SERVICES } from "@/data/ogImages";
+import { SERVICES_TITLE, SERVICES_DESCRIPTION } from "@/lib/seo/staticMeta";
 
 const ORDER: ServiceCategory[] = ["marketing", "tech", "business"];
 
@@ -16,8 +17,8 @@ export default function ServicesIndex() {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SeoHead
-        title="Web, App, AI & Growth Services | Pixcellor"
-        description="25 services across web, apps, AI, marketing and operations — from £22/hr telesales to full-stack builds and fractional CTO retainers."
+        title={SERVICES_TITLE}
+        description={SERVICES_DESCRIPTION}
         path="/services"
         image={OG_SERVICES}
       />

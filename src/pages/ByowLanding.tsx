@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import SeoHead from "@/components/SeoHead";
+import { BYOW_TITLE, BYOW_DESCRIPTION } from "@/lib/seo/staticMeta";
 import CreateSiteWizard from "@/components/byow/CreateSiteWizard";
 import { getAffiliateRef } from "@/lib/affiliateRef";
 
@@ -127,8 +128,8 @@ export default function ByowLanding() {
   return (
     <>
       <SeoHead
-        title="Build your own website — managed by Pixcellor™"
-        description="Pick a plan, chat your changes, watch us ship them in hours. Managed hosting, AI lead-gen, and human builders. From £100/month."
+        title={BYOW_TITLE}
+        description={BYOW_DESCRIPTION}
         path="/byow"
       />
       <main className="min-h-screen bg-black text-white">
