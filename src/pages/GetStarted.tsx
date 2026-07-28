@@ -31,7 +31,6 @@ import CallBookingPicker, { type BookingSelection } from "@/components/CallBooki
 import PackageCompareTable from "@/components/PackageCompareTable";
 import AllInOneComparison from "@/components/AllInOneComparison";
 import { PACKAGE_DETAILS } from "@/data/packages";
-import { getLowestOneOff } from "@/lib/seo/pricing";
 import { SERVICES, SERVICE_CATEGORIES, type ServiceCategory } from "@/data/services";
 
 import hays from "@/assets/logos/hays.svg";
