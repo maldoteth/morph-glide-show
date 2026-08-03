@@ -2705,6 +2705,133 @@ export type Database = {
         }
         Relationships: []
       }
+      phone_calls: {
+        Row: {
+          agent_email: string | null
+          agent_name: string | null
+          ai_error: string | null
+          ai_notes: string | null
+          ai_outcome: string | null
+          ai_processed_at: string | null
+          ai_sentiment: string | null
+          ai_summary: string | null
+          answered_at: string | null
+          callback_event_id: string | null
+          contact_id: string | null
+          created_at: string
+          direction: string
+          ended_at: string | null
+          external_number: string | null
+          from_number: string | null
+          id: string
+          note_event_id: string | null
+          provider: string
+          provider_call_id: string
+          raw_payload: Json
+          recording_mime_type: string | null
+          recording_size_bytes: number | null
+          recording_storage_path: string | null
+          recording_url: string | null
+          started_at: string | null
+          status: string | null
+          talk_time_seconds: number | null
+          to_number: string | null
+          transcript: string | null
+          updated_at: string
+          waiting_time_seconds: number | null
+        }
+        Insert: {
+          agent_email?: string | null
+          agent_name?: string | null
+          ai_error?: string | null
+          ai_notes?: string | null
+          ai_outcome?: string | null
+          ai_processed_at?: string | null
+          ai_sentiment?: string | null
+          ai_summary?: string | null
+          answered_at?: string | null
+          callback_event_id?: string | null
+          contact_id?: string | null
+          created_at?: string
+          direction?: string
+          ended_at?: string | null
+          external_number?: string | null
+          from_number?: string | null
+          id?: string
+          note_event_id?: string | null
+          provider?: string
+          provider_call_id: string
+          raw_payload?: Json
+          recording_mime_type?: string | null
+          recording_size_bytes?: number | null
+          recording_storage_path?: string | null
+          recording_url?: string | null
+          started_at?: string | null
+          status?: string | null
+          talk_time_seconds?: number | null
+          to_number?: string | null
+          transcript?: string | null
+          updated_at?: string
+          waiting_time_seconds?: number | null
+        }
+        Update: {
+          agent_email?: string | null
+          agent_name?: string | null
+          ai_error?: string | null
+          ai_notes?: string | null
+          ai_outcome?: string | null
+          ai_processed_at?: string | null
+          ai_sentiment?: string | null
+          ai_summary?: string | null
+          answered_at?: string | null
+          callback_event_id?: string | null
+          contact_id?: string | null
+          created_at?: string
+          direction?: string
+          ended_at?: string | null
+          external_number?: string | null
+          from_number?: string | null
+          id?: string
+          note_event_id?: string | null
+          provider?: string
+          provider_call_id?: string
+          raw_payload?: Json
+          recording_mime_type?: string | null
+          recording_size_bytes?: number | null
+          recording_storage_path?: string | null
+          recording_url?: string | null
+          started_at?: string | null
+          status?: string | null
+          talk_time_seconds?: number | null
+          to_number?: string | null
+          transcript?: string | null
+          updated_at?: string
+          waiting_time_seconds?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "phone_calls_callback_event_id_fkey"
+            columns: ["callback_event_id"]
+            isOneToOne: false
+            referencedRelation: "contact_events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "phone_calls_contact_id_fkey"
+            columns: ["contact_id"]
+            isOneToOne: false
+            referencedRelation: "contacts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "phone_calls_note_event_id_fkey"
+            columns: ["note_event_id"]
+            isOneToOne: false
+            referencedRelation: "contact_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       portfolio_projects: {
         Row: {
           category: string | null
@@ -4365,6 +4492,7 @@ export type Database = {
         Returns: Json
       }
       fetch_chat_history: { Args: { _client_id: string }; Returns: Json }
+      find_contact_by_phone: { Args: { _phone: string }; Returns: string }
       gen_meeting_code: { Args: never; Returns: string }
       generate_order_code: { Args: never; Returns: string }
       get_affiliate_public: {
@@ -4432,6 +4560,7 @@ export type Database = {
         Returns: number
       }
       next_invoice_number: { Args: never; Returns: string }
+      normalize_phone: { Args: { _phone: string }; Returns: string }
       portal_add_candidate_document:
         | {
             Args: {
